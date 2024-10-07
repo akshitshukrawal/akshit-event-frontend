@@ -36,8 +36,7 @@ const ShowBookings = () => {
       const response = await axios.get(`https://akshit-event-manager.vercel.app/api/events/${id}`, {
         withCredentials: true
       });
-      console.log("one Booking event -> ",response);
-      setEvent(response.data[0]);
+      return response.data[0].name;
     } catch (error) {
       setError('Error fetching event details');
     } finally {
