@@ -39,9 +39,7 @@ const ShowBookings = () => {
       return response.data[0].name;
     } catch (error) {
       setError('Error fetching event details');
-    } finally {
-      setLoading(false); // Stop loading once the API call is done
-    }
+    } 
   };
   // Get today's date using dayjs
   const today = dayjs();
