@@ -21,9 +21,9 @@ const ShowOneBooking = ({ booking }) => {
       }
     };
 
-    if (booking.event) {
-      getEventById();  // Fetch event details when booking.event is available
-    }
+
+    getEventById();  // Fetch event details when booking.event is available
+    
   }, []); // Add booking.event to the dependency array
 
   if (loading) {
