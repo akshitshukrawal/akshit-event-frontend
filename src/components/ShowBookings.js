@@ -16,7 +16,6 @@ const ShowBookings = () => {
         const response = await axios.get(`https://akshit-event-manager.vercel.app/api/bookings/user/${userInfo._id}`, {
           withCredentials: true
         });
-        response.data.map((f) => console.log(f.event));
         setBookings(response.data); // Set the bookings in state
 
       } catch (error) {
@@ -36,6 +35,7 @@ const ShowBookings = () => {
       const response = await axios.get(`https://akshit-event-manager.vercel.app/api/events/${id}`, {
         withCredentials: true
       });
+      console.log("this is user -> ",response.data);
       return response.data[0].name;
     } catch (error) {
       setError('Error fetching event details');
