@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs'; // Optional: to format the date
-import ShowOneBooking from './ShowOneBooking';
 
 const ShowBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -32,6 +31,19 @@ const ShowBookings = () => {
     }
   }, [userInfo]);
 
+  const getEventById = async (id) => {
+    try {
+      const response = await axios.get(`https://akshit-event-manager.vercel.app/api/events/${id}`, {
+        withCredentials: true
+      });
+      console.log("one Booking event -> ",response);
+      setEvent(response.data[0]);
+    } catch (error) {
+      setError('Error fetching event details');
+    } finally {
+      setLoading(false); // Stop loading once the API call is done
+    }
+  };
   // Get today's date using dayjs
   const today = dayjs();
 
@@ -49,7 +61,13 @@ const ShowBookings = () => {
           {upcomingBookings
             .sort((a, b) => new Date(a.date) - new Date(b.date)) // Sort bookings by date (soonest first)
             .map((booking) => (
-              <ShowOneBooking key={booking._id} booking={booking} />
+              <div key={booking._id} className="bg-white rounded-lg shadow-md p-4">
+                <h2 className="text-lg font-bold">{getEventById(booking.event) || 'Event Name'}</h2>
+                <p className="text-gray-700">Tickets Booked: {booking.noOfTickets}</p>
+                <p className="text-gray-600">
+                  Booking Date & Time: {new Date(booking.date).toLocaleString()} {/* Shows date and time */}
+                </p>
+              </div>
             ))}
         </div>
       ) : (
