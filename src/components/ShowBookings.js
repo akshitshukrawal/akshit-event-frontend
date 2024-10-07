@@ -59,7 +59,7 @@ const ShowBookings = () => {
             .sort((a, b) => new Date(a.date) - new Date(b.date)) // Sort bookings by date (soonest first)
             .map((booking) => (
               <div key={booking._id} className="bg-white rounded-lg shadow-md p-4">
-                <h2 className="text-lg font-bold">{getEventById(booking.event) || 'Event Name'}</h2>
+                <h2 className="text-lg font-bold">{'Event Name'}</h2>
                 <p className="text-gray-700">Tickets Booked: {booking.noOfTickets}</p>
                 <p className="text-gray-600">
                   Booking Date & Time: {new Date(booking.date).toLocaleString()} {/* Shows date and time */}
